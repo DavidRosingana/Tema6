@@ -9,6 +9,7 @@ try:
 	if len(sys.argv)>3:
 		if sys.argv == "-O":
 			save = sys.argv[3]
+			archivo = sys.argv[4]
 			init_port,end_port = sys.argv[1].split("-")
 			ip_result = socket.gethostbyname(sys.argv[2])
 			print("Iniciando escaneo de la ip {} ...".format(ip_result))
@@ -19,14 +20,14 @@ try:
 				if conexion == 0:
 					print("PORT", port, "OPEN")
 					puerto.close()
-			file = open("/home/rosin/Desktop/Hacking/Intecssa/Python/file.txt")
+			file = open("/home/rosin/Desktop/Hacking/Intecssa/Python/", {archivo})
 			file.write(str(ip_result), str(port))
 			file.close()
-	else:
-		exit(1)
+		else:
+			exit(1)
 
 	elif len(sys.argv)>2:
-		init_port,end_port = sys.argv[1].split("-")
+		init_port, end_port = sys.argv[1].split("-")
 		ip_result = socket.gethostbyname(sys.argv[2])
 		print("Iniciando escaneo de la ip {} ...".format(ip_result))
 		for port in range (int(init_port),int(end_port)):
@@ -39,7 +40,7 @@ try:
 
 	else:
 		ip_result = socket.gethostbyname(sys.argv[1])
-		print("Iniciando escaneo de la ip {} ...".format(ip_result)
+		print("Iniciando escaneo de la ip {} ...".format(ip_result))
 		for port in default_ports:
 			puerto = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 			puerto.settimeout(5000)
