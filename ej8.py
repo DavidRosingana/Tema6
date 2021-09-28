@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-#Escaner de puertos con opcion de crear un fichero
-
 import sys
 import traceback
 import socket
@@ -13,6 +11,7 @@ try:
             option = sys.argv[3]
             text = sys.argv[4]
             init_port, end_port = sys.argv[1].split("-")
+            openports = []
             ip_result = socket.gethostbyname(sys.argv[2])
             print("Iniciando escaneo de la ip {} ...".format(ip_result))
             for port in range(int(init_port), int(end_port)):
@@ -21,12 +20,12 @@ try:
                 conexion = puerto.connect_ex((ip_result, port))
                 if conexion == 0:
                     print("PORT", port, "OPEN")
+                    openports.append("PORT: {}".format(port))
                     puerto.close()
-            file = open("/home/rosin/Desktop/Hacking/Intecssa/Python/{}".format(text), "x")
-            file.write("IP:".format(str(ip_result)))
-            for i in range(int(init_port), int(end_port)):
-                file.write("port: ")
-                file.write((str(port))
+            file = open("/home/rosin/Desktop/Hacking/Intecssa/Python/file.txt", "x")
+            file.write("IP: {}".format(ip_result))
+            for i in openports:
+                file.write(str("\n{}".format(i)))
             file.close()
 
     elif len(sys.argv) > 2:
@@ -51,6 +50,8 @@ try:
             if conexion == 0:
                 print("PORT", port, "OPEN")
                 puerto.close()
+    else:
+        exit(1)
 
 except:
     traceback.print_exc()
