@@ -5,6 +5,7 @@ import traceback
 import socket
 
 default_ports = [20, 21, 22, 25, 53, 80, 139, 443, 1080, 3128, 8080, 8081]
+
 try:
     if len(sys.argv) > 3:
         if sys.argv[3] == "-O":
